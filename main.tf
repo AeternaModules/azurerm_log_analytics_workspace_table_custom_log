@@ -9,11 +9,14 @@ resource "azurerm_log_analytics_workspace_table_custom_log" "log_analytics_works
   retention_in_days       = each.value.retention_in_days
   total_retention_in_days = each.value.total_retention_in_days
 
-  column {
-    description  = each.value.column.description
-    display_name = each.value.column.display_name
-    name         = each.value.column.name
-    type         = each.value.column.type
+  dynamic "column" {
+    for_each = each.value.column
+    content {
+      description  = column.value.description
+      display_name = column.value.display_name
+      name         = column.value.name
+      type         = column.value.type
+    }
   }
 }
 

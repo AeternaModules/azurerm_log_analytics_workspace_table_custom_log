@@ -22,15 +22,23 @@ EOT
     workspace_id            = string
     description             = optional(string)
     display_name            = optional(string)
-    plan                    = optional(string, "Analytics")
+    plan                    = optional(string) # Default: "Analytics"
     retention_in_days       = optional(number)
     total_retention_in_days = optional(number)
-    column = object({
+    column = list(object({
       description  = optional(string)
       display_name = optional(string)
       name         = string
       type         = string
-    })
+    }))
   }))
+  validation {
+    condition = alltrue([
+      for k, v in var.log_analytics_workspace_table_custom_logs : (
+        length(v.column) >= 1
+      )
+    ])
+    error_message = "Each column list must contain at least 1 items"
+  }
 }
 
