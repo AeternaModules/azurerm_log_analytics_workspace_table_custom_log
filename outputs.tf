@@ -1,3 +1,7 @@
+output "log_analytics_workspace_table_custom_logs_id" {
+  description = "Map of id values across all log_analytics_workspace_table_custom_logs, keyed the same as var.log_analytics_workspace_table_custom_logs"
+  value       = { for k, v in azurerm_log_analytics_workspace_table_custom_log.log_analytics_workspace_table_custom_logs : k => v.id }
+}
 output "log_analytics_workspace_table_custom_logs_column" {
   description = "Map of column values across all log_analytics_workspace_table_custom_logs, keyed the same as var.log_analytics_workspace_table_custom_logs"
   value       = { for k, v in azurerm_log_analytics_workspace_table_custom_log.log_analytics_workspace_table_custom_logs : k => v.column }
