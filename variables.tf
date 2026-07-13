@@ -22,7 +22,7 @@ EOT
     workspace_id            = string
     description             = optional(string)
     display_name            = optional(string)
-    plan                    = optional(string) # Default: "Analytics"
+    plan                    = optional(string)
     retention_in_days       = optional(number)
     total_retention_in_days = optional(number)
     column = list(object({
